@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.users
+package chunmaru.ua.database.users
 
 import chunmaru.ua.features.all_users.UserResponseRemote
 

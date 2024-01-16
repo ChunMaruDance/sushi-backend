@@ -1,8 +1,8 @@
 package chunmaru.ua.features.all_users
 
-import chunmaru.ua.databse.admins.AdminDTO
-import chunmaru.ua.databse.admins.AdminsModel
-import chunmaru.ua.databse.users.UserModel
+import chunmaru.ua.database.admins.AdminDTO
+import chunmaru.ua.database.admins.AdminsModel
+import chunmaru.ua.database.users.UserModel
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*

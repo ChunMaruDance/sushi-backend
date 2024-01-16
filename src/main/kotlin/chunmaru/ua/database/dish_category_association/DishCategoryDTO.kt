@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.dish_category_association
+package chunmaru.ua.database.dish_category_association
 
 class DishCategoryDTO(
     val id: Int,

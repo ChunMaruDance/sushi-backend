@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.tokens
+package chunmaru.ua.database.tokens
 
 class TokenDTO(
     val id: Int,

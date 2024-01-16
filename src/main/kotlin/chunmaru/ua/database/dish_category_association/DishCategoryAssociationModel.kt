@@ -1,8 +1,8 @@
-package chunmaru.ua.databse.dish_category_association
+package chunmaru.ua.database.dish_category_association
 
-import chunmaru.ua.databse.dish_categories.DishCategoriesModel
-import chunmaru.ua.databse.dishes.DishesDTO
-import chunmaru.ua.databse.dishes.DishesModel
+import chunmaru.ua.database.dish_categories.DishCategoriesModel
+import chunmaru.ua.database.dishes.DishesDTO
+import chunmaru.ua.database.dishes.DishesModel
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 

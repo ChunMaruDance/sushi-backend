@@ -1,6 +1,6 @@
-package chunmaru.ua.databse.admins
+package chunmaru.ua.database.admins
 
-import chunmaru.ua.databse.tokens.TokensModel
+import chunmaru.ua.database.tokens.TokensModel
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 

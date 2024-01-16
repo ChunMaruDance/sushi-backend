@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.dishes
+package chunmaru.ua.database.dishes
 
 
 class DishesDTO(

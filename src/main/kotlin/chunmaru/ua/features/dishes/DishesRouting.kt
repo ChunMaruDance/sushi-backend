@@ -1,7 +1,7 @@
 package chunmaru.ua.features.dishes
 
-import chunmaru.ua.databse.dishes.DishesDTO
-import chunmaru.ua.databse.dishes.DishesModel
+import chunmaru.ua.database.dishes.DishesDTO
+import chunmaru.ua.database.dishes.DishesModel
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*

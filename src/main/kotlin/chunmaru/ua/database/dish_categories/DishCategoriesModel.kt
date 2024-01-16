@@ -1,6 +1,6 @@
-package chunmaru.ua.databse.dish_categories
+package chunmaru.ua.database.dish_categories
 
-import chunmaru.ua.databse.dish_category_association.DishCategoryDTO
+import chunmaru.ua.database.dish_category_association.DishCategoryDTO
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert

@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.admins
+package chunmaru.ua.database.admins
 
 class AdminDTO(
     val token: String,

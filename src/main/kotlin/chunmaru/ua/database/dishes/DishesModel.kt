@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.dishes
+package chunmaru.ua.database.dishes
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.api.ExposedBlob

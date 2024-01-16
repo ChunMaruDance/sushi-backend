@@ -1,4 +1,4 @@
-package chunmaru.ua.databse.users
+package chunmaru.ua.database.users
 
 import chunmaru.ua.utils.PasswordUtils
 import org.jetbrains.exposed.sql.Table

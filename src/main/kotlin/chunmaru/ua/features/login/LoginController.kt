@@ -1,9 +1,9 @@
 package chunmaru.ua.features.login
 
 
-import chunmaru.ua.databse.tokens.TokenDTO
-import chunmaru.ua.databse.tokens.TokensModel
-import chunmaru.ua.databse.users.UserModel
+import chunmaru.ua.database.tokens.TokenDTO
+import chunmaru.ua.database.tokens.TokensModel
+import chunmaru.ua.database.users.UserModel
 import chunmaru.ua.utils.PasswordUtils
 import io.ktor.http.*
 import io.ktor.server.application.*
