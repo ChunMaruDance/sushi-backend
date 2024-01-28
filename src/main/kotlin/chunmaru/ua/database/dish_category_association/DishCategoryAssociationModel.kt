@@ -9,7 +9,6 @@ import org.jetbrains.exposed.sql.transactions.transaction
 object DishCategoryAssociationModel : Table("dish_category_association") {
     private val dishId = integer("dish_id").references(DishesModel.id)
     private val categoryId = integer("category_id").references(DishCategoriesModel.id)
-
     override val primaryKey = PrimaryKey(dishId, categoryId, name = "PK_DishCategoryAssociation")
 
 
@@ -33,11 +32,11 @@ object DishCategoryAssociationModel : Table("dish_category_association") {
     }
 
 
-    fun getDishesByCategory(categoryId: Int): List<DishesDTO> {
+    private fun getDishesByCategory(category: Int): List<DishesDTO> {
         return transaction {
             DishCategoryAssociationModel
                 .slice(dishId)
-                .select { DishCategoryAssociationModel.categoryId eq categoryId }
+                .select { categoryId eq category }
                 .mapNotNull { row ->
                     val dishId = row[DishCategoryAssociationModel.dishId]
                     DishesModel
@@ -56,4 +55,17 @@ object DishCategoryAssociationModel : Table("dish_category_association") {
                 }
         }
     }
+
+
+    fun getDishesByCategory(category: String): List<DishesDTO> {
+
+        return transaction {
+            val id = DishCategoriesModel.getIdByName(category)!!
+            getDishesByCategory(id)
+
+        }
+
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package chunmaru.ua
 
 import chunmaru.ua.features.all_users.configureUsersRouting
+import chunmaru.ua.features.category.configureCategoryRouting
 import chunmaru.ua.features.dishes.configureDishesRouting
 import chunmaru.ua.features.login.configureLoginRouting
 import chunmaru.ua.features.register.configureRegisterRouting
@@ -25,6 +26,7 @@ fun Application.module() {
     configureLoginRouting()
     configureRegisterRouting()
     configureUsersRouting()
+    configureCategoryRouting()
 
 }
 

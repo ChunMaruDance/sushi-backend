@@ -1,58 +1,26 @@
 package chunmaru.ua.features.dishes
 
-import chunmaru.ua.database.dishes.DishesDTO
-import chunmaru.ua.database.dishes.DishesModel
-import io.ktor.http.*
+
 import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.configureDishesRouting() {
     routing {
+
         post("/dishes/add") {
-
-            val receive = call.receive(DishesAddReceiveRemote::class)
-            DishesModel.addDish(
-                DishesDTO(
-                    id = 0,
-                    name = receive.dishes.name,
-                    descriptions = receive.dishes.descriptions,
-                    price = receive.dishes.price,
-                    discount = receive.dishes.discount,
-                    weight = receive.dishes.weight,
-                    image = receive.byteArray
-                )
-            )
-            call.respond("gd")
-
+            DishesController(call = call).addDish()
         }
 
         get("/dishes/dish") {
+            DishesController(call = call).getDish()
+        }
 
-            val receive = call.parameters["id"]
-            receive?.let {
-                try {
-                    val dish = DishesModel.getDishById(it.toInt())
-                    call.respond(
-                        DishResponseRemote(
-                            id = dish.id,
-                            name = dish.name,
-                            descriptions = dish.descriptions,
-                            price = dish.price,
-                            weight = dish.weight,
-                            image = dish.image,
-                            discount = dish.discount
-                        )
-                    )
-                } catch (e: Exception) {
-                    print("Error $e")
-                    call.respond(HttpStatusCode.BadRequest, "Error :$e")
-                }
+        get("/dishes/by_category") {
+            DishesController(call = call).getDishesByCategory()
+        }
 
-            } ?: call.respond("Not Valid parameters")
-
-
+        get("/dishes/special") {
+            DishesController(call =call).getSpecialDish()
         }
 
 

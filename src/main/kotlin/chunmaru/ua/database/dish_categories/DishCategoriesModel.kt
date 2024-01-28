@@ -1,39 +1,52 @@
 package chunmaru.ua.database.dish_categories
 
-import chunmaru.ua.database.dish_category_association.DishCategoryDTO
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DishCategoriesModel : Table("dish_categories") {
     val id = integer("id").autoIncrement()
     val name = varchar("name", 255)
+    val descriptions = text("descriptions")
 
-    fun addCategory(categoryName: String) {
+    fun addCategory(category: CategoryDTO) {
         transaction {
             insert {
-                it[name] = categoryName
+                it[name] = category.name
+                it[descriptions] = category.descriptions
             }
         }
     }
 
-    fun removeCategory(categoryId: Int) {
+    fun removeCategory(categoryName: String) {
         transaction {
-            deleteWhere { DishCategoriesModel.id eq categoryId }
+            deleteWhere { name eq categoryName }
         }
     }
 
-    fun getAllCategories(): List<DishCategoryDTO> {
+    fun getAllCategories(): List<CategoryDTO> {
         return transaction {
             selectAll().map { row ->
-                DishCategoryDTO(
-                    row[DishCategoriesModel.id],
-                    row[name]
+                CategoryDTO(
+                    id = id,
+                    name = row[name],
+                    descriptions = row[descriptions]
                 )
             }
         }
     }
+
+    fun getIdByName(categoryName: String): Int? {
+        return try {
+            transaction {
+                val categoryModel = DishCategoriesModel.select { name eq categoryName }.single()
+                categoryModel[DishCategoriesModel.id]
+
+            }
+        } catch (e: Exception) {
+            null
+        }
+
+    }
+
 
 }

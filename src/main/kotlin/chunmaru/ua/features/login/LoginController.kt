@@ -1,6 +1,7 @@
 package chunmaru.ua.features.login
 
 
+import chunmaru.ua.database.admins.AdminsModel
 import chunmaru.ua.database.tokens.TokenDTO
 import chunmaru.ua.database.tokens.TokensModel
 import chunmaru.ua.database.users.UserModel
@@ -15,22 +16,14 @@ class LoginController(private val call: ApplicationCall) {
 
     suspend fun loginUser() {
         val receive = call.receive(LoginReceiveRemote::class)
-        val userDTO = UserModel.fetchUser(receive.login)
+        val userDTO = AdminsModel.getAdminByLogin(receive.login)
 
         if (userDTO == null) {
             call.respond(HttpStatusCode.BadRequest)
         } else {
 
             if (PasswordUtils.verifyPassword(receive.password, userDTO.passwordHash, userDTO.passwordSalt)) {
-                val newToken = UUID.randomUUID().toString()
-                TokensModel.insert(
-                    TokenDTO(
-                        id = 0,
-                        token = newToken,
-                        login = receive.login
-                    )
-                )
-                call.respond(LoginResponseRemote(token = newToken))
+                call.respond(LoginResponseRemote(token = userDTO.token))
             } else {
                 call.respond(HttpStatusCode.BadRequest, "Invalid password")
             }

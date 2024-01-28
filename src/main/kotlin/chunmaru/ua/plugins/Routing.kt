@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 fun Application.configureRouting() {
     routing {
         get("/") {
-            call.respondText("Hello world!")
+            call.respondText("Hello sushi!")
         }
     }
 }

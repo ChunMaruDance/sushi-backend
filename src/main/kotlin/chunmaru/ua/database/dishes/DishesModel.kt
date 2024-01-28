@@ -3,6 +3,7 @@ package chunmaru.ua.database.dishes
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.api.ExposedBlob
 import org.jetbrains.exposed.sql.transactions.transaction
+import kotlin.math.absoluteValue
 
 object DishesModel : Table("dishes") {
 
@@ -26,6 +27,14 @@ object DishesModel : Table("dishes") {
             }
         }
     }
+
+    fun getDishIdByName(dishName: String): Int? {
+        return transaction {
+            val dishesModel = select { name.eq(dishName) }.singleOrNull()
+            dishesModel?.get(DishesModel.id)
+        }
+    }
+
 
     fun removeDish(dishId: Int) {
         transaction {

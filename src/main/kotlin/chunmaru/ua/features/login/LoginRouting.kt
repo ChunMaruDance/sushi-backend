@@ -6,8 +6,7 @@ import io.ktor.server.routing.*
 fun Application.configureLoginRouting() {
     routing {
         post("/login") {
-            val loginController = LoginController(call)
-            loginController.loginUser()
+            LoginController(call).loginUser()
         }
     }
 }

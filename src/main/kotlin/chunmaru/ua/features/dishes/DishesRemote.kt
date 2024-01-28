@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DishesAddReceiveRemote(
+    val category: String,
     val dishes: DishesReceiveRemote,
     val byteArray: ByteArray
 ) {
@@ -34,6 +35,7 @@ data class DishesReceiveRemote(
     val price: Float,
     val discount: Float,
     val weight: Float,
+    val category: String
 )
 
 @Serializable

@@ -5,12 +5,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class UserResponseRemote(
-    val login: String,
-    val email: String?,
-    val username: String
+    val token: String
 )
 
 @Serializable
-data class UserReceiveRemote(
-    val login: String
+data class AdminReceive(
+    val login: String,
+    val password: String,
+    val username: String,
+    val email: String
 )

@@ -7,14 +7,17 @@ fun Application.configureUsersRouting() {
     routing {
 
         get("/users/all") {
-            val controller = UsersController(call)
-            controller.getAllUsers()
+            UsersController(call).getAllUsers()
         }
 
-        post("/users/add") {
-            val controller = UsersController(call)
-            controller.addAdmin()
+        post("/users/admin/add") {
+            UsersController(call).addAdmin()
         }
+
+        get("users/admin/info"){
+            UsersController(call).getAdminByToken()
+        }
+
 
     }
 }
