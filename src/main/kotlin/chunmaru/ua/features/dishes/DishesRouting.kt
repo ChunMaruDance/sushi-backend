@@ -20,7 +20,15 @@ fun Application.configureDishesRouting() {
         }
 
         get("/dishes/special") {
-            DishesController(call =call).getSpecialDish()
+            DishesController(call = call).getSpecialDish()
+        }
+
+        get("/dishes/recommended") {
+
+        }
+
+        get("/dishes/search") {
+            DishesController(call = call).getSearchQuery()
         }
 
 

@@ -74,5 +74,21 @@ object DishesModel : Table("dishes") {
 
     }
 
+    fun searchDishesByQuery(query: String): List<DishesDTO> {
+        return transaction {
+            select { name like "%$query%" }.map { row ->
+                DishesDTO(
+                    row[DishesModel.id],
+                    row[name],
+                    row[description],
+                    row[price],
+                    row[discount],
+                    row[weight],
+                    row[image].bytes
+                )
+            }
+        }
+    }
+
 
 }

@@ -7,11 +7,11 @@ import chunmaru.ua.features.dishes.DishesAddReceiveRemote
 fun DishesAddReceiveRemote.toDishesDTO(): DishesDTO =
     DishesDTO(
         id = 0,
-        name = this.dishes.name,
-        descriptions = this.dishes.descriptions,
-        price = this.dishes.price,
-        discount = this.dishes.discount,
-        weight = this.dishes.weight,
+        name = this.dish.name,
+        descriptions = this.dish.descriptions,
+        price = this.dish.price,
+        discount = this.dish.discount,
+        weight = this.dish.weight,
         image = this.byteArray
     )
 

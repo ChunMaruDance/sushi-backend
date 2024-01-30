@@ -9,8 +9,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 object DishCategoryAssociationModel : Table("dish_category_association") {
     private val dishId = integer("dish_id").references(DishesModel.id)
     private val categoryId = integer("category_id").references(DishCategoriesModel.id)
-    override val primaryKey = PrimaryKey(dishId, categoryId, name = "PK_DishCategoryAssociation")
 
+    override val primaryKey = PrimaryKey(dishId, categoryId, name = "PK_DishCategoryAssociation")
 
     fun addDishToCategory(dishCategoryAssociationDTO: DishCategoryAssociationDTO) {
         transaction {

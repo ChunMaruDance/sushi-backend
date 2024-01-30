@@ -3,7 +3,10 @@ package chunmaru.ua.features.dishes
 import chunmaru.ua.database.dish_categories.DishCategoriesModel
 import chunmaru.ua.database.dish_category_association.DishCategoryAssociationDTO
 import chunmaru.ua.database.dish_category_association.DishCategoryAssociationModel
+import chunmaru.ua.database.dish_ingredients.DishIngredientsModel
 import chunmaru.ua.database.dishes.DishesModel
+import chunmaru.ua.database.dishes.DishesModel.searchDishesByQuery
+import chunmaru.ua.database.dishes.toDishResponse
 import chunmaru.ua.database.special_dish.SpecialDishModel
 import chunmaru.ua.features.all_users.isAdmin
 import chunmaru.ua.utils.toDishResponseRemote
@@ -21,12 +24,12 @@ class DishesController(private val call: ApplicationCall) {
 
         val receive = call.receive(DishesAddReceiveRemote::class)
 
-        val categoryId = DishCategoriesModel.getIdByName(receive.category)
+        val categoryId = DishCategoriesModel.getIdByName(receive.dish.category)
         if (categoryId == null) {
             call.respond(HttpStatusCode.BadRequest, "Category does not exist")
         } else {
             DishesModel.addDish(receive.toDishesDTO())
-            val dishId = DishesModel.getDishIdByName(receive.dishes.name)
+            val dishId = DishesModel.getDishIdByName(receive.dish.name)
 
             DishCategoryAssociationModel.addDishToCategory(
                 DishCategoryAssociationDTO(
@@ -34,8 +37,8 @@ class DishesController(private val call: ApplicationCall) {
                     categoryId = categoryId
                 )
             )
+            DishIngredientsModel.addIngredientsToDish(dishId, receive.ingredients)
 
-            //todo add to category
         }
 
     }
@@ -78,6 +81,18 @@ class DishesController(private val call: ApplicationCall) {
         } else {
             call.respondText("Special dish not found", status = HttpStatusCode.NotFound)
         }
+    }
+
+    suspend fun getSearchQuery() {
+        val query = call.parameters["query"]
+
+        if (query != null) {
+            val dishes = searchDishesByQuery(query)
+            call.respond(dishes.toDishResponse())
+        } else {
+            call.respond(HttpStatusCode.BadRequest, "query not exist")
+        }
+
     }
 
 }

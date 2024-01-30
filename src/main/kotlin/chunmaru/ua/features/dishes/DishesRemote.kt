@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DishesAddReceiveRemote(
-    val category: String,
-    val dishes: DishesReceiveRemote,
+    val ingredients: List<Int>,
+    val dish: DishesReceiveRemote,
     val byteArray: ByteArray
 ) {
     override fun equals(other: Any?): Boolean {
@@ -14,14 +14,14 @@ data class DishesAddReceiveRemote(
 
         other as DishesAddReceiveRemote
 
-        if (dishes != other.dishes) return false
+        if (dish != other.dish) return false
         if (!byteArray.contentEquals(other.byteArray)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = dishes.hashCode()
+        var result = dish.hashCode()
         result = 31 * result + byteArray.contentHashCode()
         return result
     }
